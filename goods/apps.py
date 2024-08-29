@@ -4,4 +4,4 @@ from django.apps import AppConfig
 class GoodsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'goods'
-    verbose_name='Товары' #чтобы в админке были ТОвары а не GOOD
+    verbose_name='Товары' #чтобы в админке были Товары а не GOOD

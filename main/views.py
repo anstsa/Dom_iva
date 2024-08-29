@@ -15,3 +15,11 @@ def about(request):
         'text_on_page': 'Красткая информация о том какой хороший магазин и тавары',
     }
     return render(request, 'main/about.html', context)
+
+def contacts(request):
+    context = {
+        'title': 'Контакты',
+        'content': 'Контактная информация',
+        'text_on_page': 'Адрес, Телефон',
+    }
+    return render(request, 'main/contacts.html', context)
