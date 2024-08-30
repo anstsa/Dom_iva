@@ -5,7 +5,7 @@ class Category(models.Model):
     name = models.CharField(
         max_length=150, unique=True, verbose_name="Наименование"
     )  # максимальная длина 150, уникальное поле, имя в админке - Наименование
-    slag = models.SlugField(
+    slug = models.SlugField(
         max_length=200, unique=True, blank=True, null=True, verbose_name="URL"
     )  # максимальная длина 200, уникальное поле, поле может быть пустым,  имя в админке - URL
 
@@ -13,13 +13,16 @@ class Category(models.Model):
         db_table = "сategory"  # имя таблицы в БД
         verbose_name = "Категорию"  # имя в админке в ед.числе
         verbose_name_plural = "Категории"  # имя в админке в множественом.числе
+    
+    def __str__(self):  #возвращает имя, а не oblect(id/pk)
+        return self.name
 
 
 class Product(models.Model):
     name = models.CharField(
         max_length=150, unique=True, verbose_name="Наименование"
     )  # максимальная длина 150, уникальное поле, имя в админке - Наименование
-    slag = models.SlugField(
+    slug = models.SlugField(
         max_length=200, unique=True, blank=True, null=True, verbose_name="URL"
     )  # максимальная длина 200, уникальное поле, поле может быть пустым,  имя в админке - URL
     description = models.TextField(blank=True, null=True, verbose_name="Описание")
@@ -28,9 +31,9 @@ class Product(models.Model):
     )  # ссылка куда ссылаеться картинка
     price = models.DecimalField(
         default=0.00, max_digits=7, decimal_places=2, verbose_name="Цена"
-    )  # значение по умолчанию, 7 - цифр перед запятой, 2 - цифры после запятой
+    )  # значение по умолчанию, 4 - цифр, 2 - цифры после запятой
     discount = models.DecimalField(
-        default=0.00, max_digits=7, decimal_places=2, verbose_name="Скидка в %"
+        default=0.00, max_digits=4, decimal_places=2, verbose_name="Скидка в %"
     )
     quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
     category = models.ForeignKey(
@@ -41,3 +44,7 @@ class Product(models.Model):
         db_table = "product"  # имя таблицы в БД
         verbose_name = "Продукт"  # имя в админке в ед.числе
         verbose_name_plural = "Продукты"  # имя в админке в множественом.числе
+
+    def __str__(self): #возвращает имя и количество, а не oblect(id/pk)
+        return f'{self.name}, Количество - {self.quantity}'
+    
