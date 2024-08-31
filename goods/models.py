@@ -48,3 +48,10 @@ class Product(models.Model):
     def __str__(self): #возвращает имя и количество, а не oblect(id/pk)
         return f'{self.name}, Количество - {self.quantity}'
     
+    def display_id (self):    #метод, в методе должен быть self, возвращает id в формате 00005
+        return f'{self.id:05}'
+    
+    def sell_price (self): #метод, вычисляющий скидку на товар если скидка есть, то считаем ее, если нет то цена остается такой же
+        if self.discount:
+            return round(self.price - self.price * self.discount / 100, 2)
+        return self.price
