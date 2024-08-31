@@ -18,8 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from app.settings import DEBUG
+from app import settings 
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('catalog/', include('goods.urls', namespace='catalog')) #namespace = для обращения в шаблонах
     ]
 
-if DEBUG:  #если тру, т.е находимся в процессе разработки, то добавляем юрл маршрут для debug_toolbar из описания с сайта pypi.org
+if settings.DEBUG:  #если тру, т.е находимся в процессе разработки, то добавляем юрл маршрут для debug_toolbar из описания с сайта pypi.org
     urlpatterns += debug_toolbar_urls()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #настройки для медия
