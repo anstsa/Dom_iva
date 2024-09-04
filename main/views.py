@@ -2,14 +2,10 @@ from unicodedata import category
 from django.shortcuts import render
 from goods.models import Category
 
-def index(request):
-    
-    category = Category.objects.all()
-    
+def index(request):    
     context = {
         'title': 'Дом Ивы',
         'content': 'Магазин рукоделий Дом Ивы',
-        'category': category,
     }
     return render(request, 'main/index.html', context)
 
