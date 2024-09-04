@@ -1,14 +1,13 @@
 from django.shortcuts import render
-from django.template import context
-
 from goods.models import Product
 
-goods = Product.objects.all()
 
-
-
-def catalog(request):
-    context = {
+def catalog(request, category_slug):
+    if category_slug == 'all':
+        goods = Product.objects.all()
+    else:
+        goods = Product.objects.filter(category__slug = category_slug)
+        context = {
         "title": "Каталог",
         "goods": goods,
     }
@@ -16,9 +15,8 @@ def catalog(request):
 
 
 def product(request, product_slug):
-    product = Product.objects.get(slug = product_slug)
-   
+    produc = Product.objects.get(slug = product_slug)
     context = {
-        'product': product    
+        'product': produc   
     }
     return render(request, "goods/product.html", context = context)
