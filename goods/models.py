@@ -46,7 +46,7 @@ class Product(models.Model):
         db_table = "product"  # имя таблицы в БД
         verbose_name = "Продукт"  # имя в админке в ед.числе
         verbose_name_plural = "Продукты"  # имя в админке в множественом.числе
-        ordering = ("id",) #сортировка по id
+        ordering = ("id",) #сортировка по ид
 
     def __str__(self): #возвращает имя и количество, а не oblect(id/pk)
         return f'{self.name}, Количество - {self.quantity}'
