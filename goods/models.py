@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import override
 
 
 class Category(models.Model):
@@ -13,6 +14,7 @@ class Category(models.Model):
         db_table = "сategory"  # имя таблицы в БД
         verbose_name = "Категорию"  # имя в админке в ед.числе
         verbose_name_plural = "Категории"  # имя в админке в множественом.числе
+        ordering = ('id',) #для пагинации, сортировка по ид
     
     def __str__(self):  #возвращает имя, а не oblect(id/pk)
         return self.name
@@ -44,6 +46,7 @@ class Product(models.Model):
         db_table = "product"  # имя таблицы в БД
         verbose_name = "Продукт"  # имя в админке в ед.числе
         verbose_name_plural = "Продукты"  # имя в админке в множественом.числе
+        ordering = ("id",) #сортировка по id
 
     def __str__(self): #возвращает имя и количество, а не oblect(id/pk)
         return f'{self.name}, Количество - {self.quantity}'
