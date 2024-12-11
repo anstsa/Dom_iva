@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.timezone import override
 
 
 class Category(models.Model):
@@ -15,7 +14,7 @@ class Category(models.Model):
         verbose_name = "Категорию"  # имя в админке в ед.числе
         verbose_name_plural = "Категории"  # имя в админке в множественом.числе
         ordering = ('id',) #для пагинации, сортировка по ид
-    
+
     def __str__(self):  #возвращает имя, а не oblect(id/pk)
         return self.name
 
@@ -50,10 +49,10 @@ class Product(models.Model):
 
     def __str__(self): #возвращает имя и количество, а не oblect(id/pk)
         return f'{self.name}, Количество - {self.quantity}'
-    
+
     def display_id (self):    #метод, в методе должен быть self, возвращает id в формате 00005
         return f'{self.id:05}'
-    
+
     def sell_price (self): #метод, вычисляющий скидку на товар если скидка есть, то считаем ее, если нет то цена остается такой же
         if self.discount:
             return round(self.price - self.price * self.discount / 100, 2)
